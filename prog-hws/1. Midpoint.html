@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title> Midpoint</title>
+<style>
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+</style>
+
+</head>
+<body style="background-color:#00FFFF;">
+<h1 style="text-align:left;font-size:300;%">Midpoint Algorithm-Line,Circle,and Ellipse</h1> 
+<label class="container">Line
+  <input type="radio" name="shape" onclick="selectline()" />
+  <span class="checkmark"></span>
+</label>
+<label class="container">Circle
+  <input type="radio" name="shape" onclick="selectline()">
+  <span class="checkmark"></span>
+</label>
+
+<label class="container">Elipse
+  <input type="radio" name="shape" onclick="selectline()">
+  <span class="checkmark"></span>
+</label>
+<br>
+
+<canvas id='canvas' style='border:2px solid black; background-color:white; width:750px;  height:400px; cursor:crosshair;'>
+</canvas>
+
+
+
+<script>
+
+function takesnapshot()
+{
+snapshot= ctx.getImageData(0,0, canvas.width, canvas.height);
+}
+
+function restoresnapshot()
+{
+ctx.putImageData(snapshot,0,0);
+}
+
+function getCanvasCoordinates(event) {
+    x = event.clientX - canvas.getBoundingClientRect().left,
+    y = event.clientY - canvas.getBoundingClientRect().top;
+    return {x: x, y: y};
+}
+
+
+
+var eventList = ["change", "keyup", "paste", "input", "propertychange", "..."];
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+var rect= canvas.getBoundingClientRect();
+var X1,X2,Y1,Y2,switchno;
+var count=0
+var dragStartLocation;
+var position;
+
+var selectline= function()
+{
+canvas.addEventListener('mousedown' , function(event){
+
+ if(count==0){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+count++;
+X1 = getCanvasCoordinates(event);
+}
+var status= document.getElementById('status');
+status.innerHTML = X1 +"|" + Y1 ;
+//takesnapshot();
+},false);
+
+
+canvas.addEventListener('mousemove' , function(event){
+
+ Y1= getCanvasCoordinates(event);
+
+if(count!=0)
+{
+
+    drawline();
+//tTimeout(drawlinebreak, 3000);
+   //tx.clearRect(0,0,canvas.width,canvas.height);
+
+
+}
+},false);
+
+canvas.addEventListener('mouseup' , function(event){
+
+Y1 = getCanvasCoordinates(event);
+
+ count=0;
+
+drawline();
+//restoresnapshot();
+//drawlinebreak(X1,Y1,X2,Y2);
+
+//awlinebreak(X1,Y1,X2,Y2);
+
+},false);
+
+
+
+}
+
+var drawline=function()
+{
+
+var selected= document.getElementsByName('shape');
+if(selected[0].checked)
+{ switchno=0; }
+else if(selected[1].checked)
+{ switchno=1; }
+else
+{ switchno = 2 ; } 
+
+switch(switchno)
+{
+case 0:
+drawlinebreak(X1.x,X1.y,Y1.x,Y1.y);
+
+break;
+
+case 1:
+drawcirclebreak(X1.x*(.4),X1.y*(.37),Math.abs(X1.x*(.4)-Y1.x*(.37)));
+break;
+
+case 2:
+drawellipsebreak(X1.x*(.4),X1.y*(.35),Y1.x*(.27),Y1.y*(.37));
+break;
+
+
+
+}
+}
+
+
+var drawlinebreak=function(x0,y0,x1,y1)
+{
+canvas.width = canvas.width;
+              ctx.fillStyle = "#DC143C";
+              ctx.fill();
+
+var fx =  Math.abs(x1-x0), gx = x0<x1 ? 1 : -1;
+   var fy = -Math.abs(y1-y0), gy = y0<y1 ? 1 : -1;
+   var error = fx+fy, e1;                                   
+
+   for (;;){                                                          
+      ctx.fillRect(x0*.4,y0*.37,.5,.7);
+      if (x0 == x1 && y0 == y1) break;
+      e1 = 2*error;
+      if (e1 >= fy) { error += fy; x0 += gx; }                        
+      if (e1 <= fx) { error += fx; y0 += gy; }                        
+   }
+
+
+}
+
+function drawcirclebreak(xm,ym,r) {
+
+//context.clearRect(0,0,canvas.width,canvas.height);
+canvas.width = canvas.width;
+              ctx.fillStyle = "#fa0cb7";
+              ctx.fill();
+
+
+var xx = -r, yy = 0, error = 2-2*r;                
+   do {
+      ctx.fillRect(xm-xx, ym+yy ,1,1);                            
+      ctx.fillRect(xm-yy, ym-xx,1,1);                            
+      ctx.fillRect(xm+xx, ym-yy,1,1);                            
+      ctx.fillRect(xm+yy, ym+xx,1,1);                            
+      r = error;                                       
+      if (r <= yy) error += ++yy*2+1;                                   
+      if (r > xx || error > yy) error += ++xx*2+1;                         
+   } while (xx < 0);
+}
+
+
+
+function drawellipsebreak(xm, ym, a, b) {
+
+canvas.width = canvas.width;
+              ctx.fillStyle = "#fa0cb7";
+              ctx.fill();
+
+   var x = -a, y = 0;           
+   var e1, fx = (1+2*x)*b*b;                              
+   var fy = x*x, error = fx+fy;                              
+
+   do {
+       ctx.fillRect(xm-x, ym+y,1,1);                                 
+       ctx.fillRect(xm+x, ym+y,1,1);                                 
+       ctx.fillRect(xm+x, ym-y,1,1);                                 
+       ctx.fillRect(xm-x, ym-y,1,1);                                 
+       e1 = 2*error;                                        
+       if (e1 >= fx) { x++; error += fx += 2*b*b; }                   
+       if (e1 <= fy) { y++; error += fy += 2*a*a; }                   
+   } while (x <= 0);
+
+   while (y++ < b) {            
+       ctx.fillRect(xm, ym+y,1,1);                        
+       ctx.fillRect(xm, ym-y,1,1);
+   }
+}
+
+
+
+
+</script>
+</body>
+</html>
