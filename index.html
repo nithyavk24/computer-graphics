@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>PROGRAMMING ASSIGNMENT 1</title>
+        <script src="./main.js"></script>
+        <link rel="stylesheet" href="./reset.css">
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <header>
+            <h1>
+                COMPUTER GRAPHICS <br> PROGRAMMING ASSIGNMENT 1 </h1>
+        </header>
+        <main class="clearfix">
+            <menu class="left">
+                <ul class="menu-items">
+                    <li class="menu-item">
+                        <a href="#" id="line">
+                        Line
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" id= "polyline">
+                        Polyline
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" id= "rectangle">
+                        Rectangle
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" id="circle">
+                        Circle
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" id="ellipse">
+                        Ellipse
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="#" id ="polygon">
+                        Polygon
+                        </a>
+                    </li>
+                    <br>
+				<form style="font-size:18px">
+				<input type="radio" id="color" name="color" value="black" checked>Black<br>
+				<input type="radio" id="color" name="color" value="red">Red<br>
+				<input type="radio" id="color" name="color" value="blue">Blue<br>
+				<input type="radio" id="color" name="color" value="yellow">Yellow<br>
+				<input type="radio" id="color" name="color" value="green">Green<br>
+				<input type="radio" id="color" name="color" value="orange">Orange<br>
+				<input type="radio" id="color" name="color" value="brown">Brown<br>
+				</form>
+			<br>
+                </ul>
+            </menu>
+            <div class="right display">
+                <h1 style = "font-size:20px">CANVAS</h1>
+                <div id="c-frame">
+                    <canvas id="myCanvas" width="892" height="400" ></canvas>
+                    <input type="button" class="myButton"  value="Clear" id = "clear">
+                </div>
+                <button id="clear"></button>
+            </div>
+        </main>        
+    </body>
+</html>

@@ -1,0 +1,59 @@
+body{
+    font-family: sans-serif;
+}
+.left{
+    float:left;
+}
+.right{
+    float:right
+}
+header{
+    background-color:rgb(238, 238, 238);
+    border-bottom:5px solid #83d0f2;
+}
+header h1{
+    font-size: 20px;
+    text-align: center;
+}
+menu{
+    width: 20%;
+    height: 400px;
+    position: relative;
+    padding: 15px 0 15px 0;
+    background: rgba(220,220,220,.5);
+}
+div.display{
+    width: 80%;
+    box-sizing: border-box;
+    padding: 15px;
+}
+#myCanvas{
+    border:1px solid #000000;
+    background-color:aliceblue;
+}
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+  .clearfix { display: inline-block; }
+  /* start commented backslash hack \*/
+  * html .clearfix { height: 1%; }
+  .clearfix { display: block; }
+  /* close commented backslash hack */
+
+  .menu-item{
+      padding: 10px 15px;
+      color: #3f87a6;
+  }
+  .menu-item a{
+      text-decoration: none;
+      font-size: 16px;
+  }
+  .menu-item:hover, .menu-item.hightlight{
+      background: #fff;
+      font-weight: 700;
+  }
